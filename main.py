@@ -1,6 +1,7 @@
 from LxmlSoup import LxmlSoup
 import requests
 
+
 # ссылка на ЦИАН Горно-Алтайск
 LINK = 'https://gorno-altaysk.cian.ru/cat.php'
 
