@@ -7,7 +7,7 @@ LINK = 'https://gorno-altaysk.cian.ru/cat.php'
 # Запрос для поиска (можно запрашивать на вводе)
 REGION = 4719  # Республика Алтай, Горно-Алтайск
 MIN_PRICE = 5000000
-MAX_PRICE = 7000000
+MAX_PRICE = 8000000
 MIN_AREA = 30
 MAX_AREA = 80
 ROOM1 = 1  # 1 комн.
@@ -36,7 +36,7 @@ DATA = {'currency': 2,
         }
 
 
-def get_info_from_site():
+def get_info_from_site(link, data, headers):
 	# посылаем GET запрос на сервер
 	response = requests.get(LINK, params=DATA, headers=HEADERS)
 
@@ -44,8 +44,14 @@ def get_info_from_site():
 	status_code = response.status_code
 
 	if status_code == 200:
-		print('200 OK')
+		print('Server: 200 OK')
+		get_parsing_data(response)
+		return
+	print("Server error: ", status_code)
+	exit(1)
 
+
+def get_parsing_data(response):
 		### далее парсим результат
 		soup = LxmlSoup(response.text)
 
@@ -104,10 +110,6 @@ def get_info_from_site():
 			# price = soup.find('span', class_ ='').text()
 			print(f'{i} - {url}')
 
-	else:
-		print("Error: ", status_code)
-		exit(1)
-
 
 if __name__ == "__main__":
-	get_info_from_site()
+	get_info_from_site(LINK, DATA, HEADERS)
