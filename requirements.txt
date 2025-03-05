@@ -1,2 +1,4 @@
 LxmlSoup>=1.5.2
 requests>=2.32.3
+httpx~=0.28.1
+openpyxl~=3.1.5
