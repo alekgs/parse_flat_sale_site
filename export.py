@@ -17,21 +17,10 @@ def create_excel_file(title, count_records):
     sheet['A2'] = count_records
 
     # имя для файла экспорта в Excel
-    excel_filename = 'result_' + datetime.now().strftime("%Y%d%m_%H%M"
-                                                         ) + '.xlsx'
+    excel_filename = 'result_' + datetime.now().strftime("%Y%d%m_%H%M") + '.xlsx'
 
     # Сохраняем файл на диск
     wb.save(excel_filename)
 
     return wb, excel_filename
 
-
-def write_row_to_workbook(data: dict, excel_wb: Workbook):
-    # активный лист книги
-    sheet = excel_wb.active
-
-    for i, k in data.items():
-        sheet[f'A{i + 2}'] = i
-        sheet[f'B{i + 2}'] = k[0]
-
-    return

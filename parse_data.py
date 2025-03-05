@@ -1,5 +1,5 @@
 from LxmlSoup import LxmlSoup
-from export import create_excel_file, write_row_to_workbook
+from export import create_excel_file
 
 def get_parsing_data(response):
 	### далее парсим результат
@@ -55,25 +55,19 @@ def get_parsing_data(response):
 
 	wb, excel_file = create_excel_file(title_result[0].text(),
 	                                   flats_count[0].text())
-
-	result_data = dict()
+	sheet = wb.active
 
 	for i, link in enumerate(links, start=1):
-		current_row = []
 		url = link.get('href')
+
 		# price = soup.find('span', class_ ='').text()
 		print(f'{i} - {url}')
 
-		# добавляем полученные данные в список
-		current_row.append(url)
-
-		# добавляем строку в словарь
-		result_data[i] = current_row
-
 		# записываем строку в excel
-		write_row_to_workbook(result_data, wb)
+		sheet[f'A{i + 2}'] = i
+		sheet[f'B{i + 2}'] = url
+
+	# сохраняем файл excel
 	wb.save(excel_file)
 
-	return (title_result[0].text(),
-	        flats_count[0].text(),
-	        result_data)
+	return
