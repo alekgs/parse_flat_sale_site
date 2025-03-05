@@ -69,5 +69,6 @@ def get_parsing_data(response):
 
 	# сохраняем файл excel
 	wb.save(excel_file)
+	print(f'Экспорт завершен.')
 
 	return

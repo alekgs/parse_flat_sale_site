@@ -3,8 +3,6 @@ from datetime import datetime
 
 
 def create_excel_file(title, count_records):
-    print('Экспорт результатов в файл excel...')
-
     # Создаем новую рабочую книгу (файл)
     wb = Workbook()
 
@@ -20,6 +18,7 @@ def create_excel_file(title, count_records):
     excel_filename = 'result_' + datetime.now().strftime("%Y%d%m_%H%M") + '.xlsx'
 
     # Сохраняем файл на диск
+    print(f'Экспорт результатов в файл {excel_filename}...')
     wb.save(excel_filename)
 
     return wb, excel_filename
